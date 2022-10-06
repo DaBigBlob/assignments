@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
         return(0);
     }
 
-    unsigned int N = atoi(argv[1]), N1; N1 = N;
+    long N = atoi(argv[1]), N1; N1 = N;
 
     unsigned long num = 1, init = 0, N2 = pow(N, 2);
     unsigned long* spiral = malloc(sizeof(unsigned long) * N2);
@@ -38,15 +38,32 @@ int main(int argc, char **argv) {
         return(1);
     }
     
+    int a1, a2, b1, b2, c1, c2, d1, d2;
+    
     while (N >= 1) {
+        printf("\nnum = %lu; init = %lu; N = %ld;\n\n", num, init, N);
         for (unsigned int i=0; i<N; ++i) {
-            spiral[init + i] = num + i;
-            spiral[init + i + N*(N - 1)] = num + 3*(N - 1) - i;
+            a1 = init + i;
+            a2 = num + i;
+            b1 = init + i + N1*(N - 1);
+            b2 = num + 3*(N - 1) - i;
+            printf("a: %d ----> %d\n", a1, a2);
+            printf("b: %d ----> %d\n", b1, b2);
+            spiral[a1] = a2;
+            spiral[b1] = b2;
         }
+        printf("\nend ab\n\n");
         for (unsigned int i=1; i<=N-2; ++i) {
-            spiral[init + N*i] = num + 4*N - 3 - i;
-            spiral[init + N*(i + 1) - 1] = num + N + i;
+            c1 = init + N1*i;
+            c2 = num + 4*N - 4 - i;
+            d1 = init + N1*i + N - 1;
+            d2 = num + N - 1 + i;
+            printf("c: %d ----> %d\n", c1, c2);
+            printf("d: %d ----> %d\n", d1, d2);
+            spiral[c1] = c2;
+            spiral[d1] = d2;
         }
+        printf("\nend cd\n\n");
         num = N*4 - 3;
         init = N + 1;
         N -= 2;
@@ -55,12 +72,13 @@ int main(int argc, char **argv) {
     for (unsigned int i=0; i<N2; ++i) {
         num = spiral[i];
         printf("%lu", num);
-        if (num%N1 == 0) {
+        if ((i+1)%N1 == 0) {
             printf("\n");
         } else {
             printf("\t");
         }
     }
-        
+
+    free(spiral);
     return(0);
 }
