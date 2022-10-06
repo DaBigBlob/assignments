@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<math.h>
 
+//im bored and tired; will debiug latr
+
 //i write my own string length function 💪
 unsigned int lenstr(char *str) {
     int size = 0;
@@ -40,7 +42,7 @@ int main(int argc, char **argv) {
     
     int a1, a2, b1, b2, c1, c2, d1, d2;
     
-    while (N >= 1) {
+    while (N > 1) {
         printf("\nnum = %lu; init = %lu; N = %ld;\n\n", num, init, N);
         for (unsigned int i=0; i<N; ++i) {
             a1 = init + i;
@@ -73,7 +75,7 @@ int main(int argc, char **argv) {
         num = spiral[i];
         printf("%lu", num);
         if ((i+1)%N1 == 0) {
-            printf("\n");
+            printf("\n\n");
         } else {
             printf("\t");
         }
